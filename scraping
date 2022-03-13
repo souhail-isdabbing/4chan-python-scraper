@@ -1,3 +1,8 @@
+
+
+#how to use: python scraping thread pagenumber
+
+
 import os
 import wget
 import urllib.request
