@@ -7,7 +7,7 @@ import sys
 from pprint import pprint
 import shutil # to save it locally
 
-def link(genre): #transforms the board name, click on a board to understand the purpose of the function ps:not all board names available
+def link(genre): #transforms the board name, click on a board to understand the purpose of the function ~~ps:not all board names available~~
   genre=genre.lower()
   if genre=='anime&manga':
     return 'a'
@@ -94,17 +94,17 @@ def pagenum(num):
 
 res=requests.get(f'http://boards.4channel.org/{link(sys.argv[1])}/{pagenum(sys.argv[2])}')
 soup=BeautifulSoup(res.text,'html.parser')
-images=soup.find_all('img',loading='lazy')
+images=soup.find_all('img',loading='lazy') #scrapes images
 
-urls=[i['src'].replace('s.jpg','.jpg') for i in images]
+urls=[i['src'].replace('s.jpg','.jpg') for i in images]#fishes out the source only and modifies it to the original size
 
-urls=[i.replace('//','https://') for i in urls]
+urls=[i.replace('//','https://') for i in urls] #turns it into a link
 
 
 
 directory=f'{link(sys.argv[1])}({pagenum(sys.argv[2])})'
 
-parent_dir='C:\\Users\\SOUHAIL\\Desktop\\scraper'
+parent_dir='C:\\Users\\SOUHAIL\\Desktop\\scraper' #must be modified
 
 path=os.path.join(parent_dir,directory)
 
@@ -133,7 +133,7 @@ for url in urls:
   if r.status_code == 200: 
     r.raw.decode_content = True
     wget.download(url) #downloads the link's content
-    source=f"C:\\Users\\SOUHAIL\\Desktop\\scraper\\{filing(url)}"
+    source=f"C:\\Users\\SOUHAIL\\Desktop\\scraper\\{filing(url)}" #must be modified
     destination=path
     shutil.move(source,path)#moves each image downloaded to a directory
     print('Image sucessfully Downloaded')
